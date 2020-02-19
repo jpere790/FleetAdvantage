@@ -14,9 +14,9 @@ export class isDateLessThanTomorrowValidatorDirective implements Validator
             let dateEntered = new Date(control.value)
             let today = new Date()
             if( !dateEntered || dateEntered > today )
-            return {'inTheFuture': true, 'firstTouched':false}
+            return {'inTheFuture': true}
             else
             return  null
-        } else return {'firstTouched':true}
+        } else return null
     }
 }

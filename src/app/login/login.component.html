@@ -16,7 +16,7 @@
                             </div>
                             <input required minlength="1" maxlength="56" ngModel name="firstAndLast" id="firstAndLast" #firstname="ngModel"  type="text" class="form-control" placeholder="Ex: John Doe"> <!--here one-->
                         </div>
-                        <div class="alert alert-danger" *ngIf="firstname.touched && !firstname.valid">
+                        <div class="alert alert-danger warn" *ngIf="firstname.touched && !firstname.valid">
                             <div *ngIf="firstname.errors?.required"> * First Name is requiered</div>
                             <div *ngIf="firstname.errors?.minlength"> * First and Last should be minimum {{firstname.errors.minlength.requiredLength}} character long.</div>             
                         </div>
@@ -31,13 +31,11 @@
                             </div>
                             <input readonly="true" required isDateLessThanTomorrow ngModel name="dob" id="dob"  #dob="ngModel" class="form-control" placeholder="mm/dd/yyyy" name="dp" (click)="d.toggle(); " ngbDatepicker #d="ngbDatepicker"> <!--here Two-->
                         </div>
-                        <div style="color:white;">
-                        </div>
-                        <div class="alert alert-danger" *ngIf="!dob.errors?.firstTouched && dob.touched && !dob.valid">
-                            <div *ngIf="dob.errors?.required"> * Date of Birth is requiered.</div>
-                            <div *ngIf="dob.errors?.inTheFuture && !dob.errors?.required"> * Date of Birth cannot be in the future.</div>        
-                            <div *ngIf="!dob.errors?.inTheFuture && !dob.errors?.required"> * Date of Birth format is incorrect.</div>                     
-                        </div>
+                        <!--git-->
+                        <div class="alert alert-danger warn" *ngIf="dob.touched && !dob.valid">
+                            <div *ngIf="dob.errors?.required"> * DOB is requiered.</div>
+                            <div *ngIf="dob.errors?.inTheFuture && !dob.errors?.required"> * DOB cannot be in the future.</div>                         
+                        </div> 
                     </div>
 
 					<div class="form-group">
