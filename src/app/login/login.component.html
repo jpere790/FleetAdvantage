@@ -1,0 +1,55 @@
+<div *ngIf="!loggedIn" class="container">
+	<div class="d-flex justify-content-center h-100">
+		<div class="card">
+			<div class="card-header">
+				<h3>Sign In</h3>
+			</div>
+			<div class="card-body">
+				<form>
+					<div class=" form-group column" >
+                        <div class="labelColor">
+                            <label for="firstAndLast">First and Last Name</label>
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input required minlength="1" maxlength="56" ngModel name="firstAndLast" id="firstAndLast" #firstname="ngModel"  type="text" class="form-control" placeholder="Ex: John Doe"> <!--here one-->
+                        </div>
+                        <div class="alert alert-danger" *ngIf="firstname.touched && !firstname.valid">
+                            <div *ngIf="firstname.errors?.required"> * First Name is requiered</div>
+                            <div *ngIf="firstname.errors?.minlength"> * First and Last should be minimum {{firstname.errors.minlength.requiredLength}} character long.</div>             
+                        </div>
+					</div>
+                    <div class="form-group">
+                        <div class="labelColor">
+                            <label for="firstAndLast">Date of Birth</label>
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-prepend" (click)="d.toggle()" >
+                                <span class="input-group-text"><i class="fa fa-table"></i></span>
+                            </div>
+                            <input readonly="true" required isDateLessThanTomorrow ngModel name="dob" id="dob"  #dob="ngModel" class="form-control" placeholder="mm/dd/yyyy" name="dp" (click)="d.toggle(); " ngbDatepicker #d="ngbDatepicker"> <!--here Two-->
+                        </div>
+                        <div style="color:white;">
+                        </div>
+                        <div class="alert alert-danger" *ngIf="!dob.errors?.firstTouched && dob.touched && !dob.valid">
+                            <div *ngIf="dob.errors?.required"> * Date of Birth is requiered.</div>
+                            <div *ngIf="dob.errors?.inTheFuture && !dob.errors?.required"> * Date of Birth cannot be in the future.</div>        
+                            <div *ngIf="!dob.errors?.inTheFuture && !dob.errors?.required"> * Date of Birth format is incorrect.</div>                     
+                        </div>
+                    </div>
+
+					<div class="form-group">
+                        <input type="submit" [disabled]="dob.errors" [ngClass]="{'disabled': dob.errors}" value="Login" class="btn float-right login_btn" (click)="loggedIn=!loggedIn">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container d-flex justify-content-center h-100 loggedIn"  *ngIf="loggedIn">
+    <div class="card padding2">
+        You are now Logged in
+    </div>
+</div>
